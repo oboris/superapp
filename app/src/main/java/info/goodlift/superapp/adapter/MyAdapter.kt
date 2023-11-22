@@ -16,7 +16,15 @@ import info.goodlift.superapp.model.Book
 import info.goodlift.superapp.model.ItemTypeInterface
 
 class MyAdapter(val mainActivity: MainActivity) : RecyclerView.Adapter<MyAdapter.MyHolder>() {
-    private val myList: List<ItemTypeInterface> = mainActivity.vm.myList
+    private var myList: List<ItemTypeInterface> = emptyList()
+
+//    private var orderViewModel: OrderViewModel = ViewModelProvider(orderFragment as ViewModelStoreOwner)[OrderViewModel::class.java]
+    init {
+        mainActivity.vm.myList.observe(mainActivity){
+            myList = it
+            notifyDataSetChanged()
+        }
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHolder {
         return when (viewType) {
             ItemTypeInterface.bookType -> BookHolder(BookItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))

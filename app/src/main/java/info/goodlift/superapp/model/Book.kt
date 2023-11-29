@@ -19,18 +19,20 @@ import androidx.room.PrimaryKey
 )
 data class Book(
     var name: String,
-    @Ignore
-    val author: Author,
+
     @ColumnInfo(name = "page_number")
     val pageNumbers: Int,
     val comment: String? = null
 ) : ItemTypeInterface {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_book")
-    val idBook: Int = 0
+    var idBook: Long = 0
+
+    @Ignore
+    var author: Author? = null
 
     @ColumnInfo(name = "id_author")
-    val idAuthor: Int = author.idAuthor
+    var idAuthor: Long = author?.idAuthor ?: 0
     override fun getItemType(): Int {
         return ItemTypeInterface.bookType
     }

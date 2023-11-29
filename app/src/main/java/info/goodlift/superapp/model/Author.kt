@@ -15,7 +15,7 @@ data class Author(
 ) : ItemTypeInterface {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_author")
-    var idAuthor: Int = 0
+    var idAuthor: Long = 0
     override fun getItemType(): Int {
         return ItemTypeInterface.authorType
     }

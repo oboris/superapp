@@ -10,7 +10,7 @@
         android:id="@+id/tvFirstName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:text="book name"
         tools:ignore="HardcodedText" />
 
@@ -29,4 +29,11 @@
         android:layout_weight="1"
         android:text="300"
         tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btnAuthorDel"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Del" />
 </LinearLayout>

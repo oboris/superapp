@@ -6,10 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import info.goodlift.superapp.dao.MyDao
 import info.goodlift.superapp.model.Author
+import info.goodlift.superapp.model.Book
 
 @Database(
     entities = [
-//        Book::class,
+        Book::class,
         Author::class,
     ],
     version = 1,

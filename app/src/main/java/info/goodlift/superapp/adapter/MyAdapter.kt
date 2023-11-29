@@ -53,9 +53,9 @@ class MyAdapter(val mainActivity: MainActivity) : RecyclerView.Adapter<MyAdapter
         override fun bind(item: ItemTypeInterface){
             item as Book
             itemBinding.tvBookName.text = item.name
-            itemBinding.inclBookAuthor.tvFirstName.text = item.author.firstName
-            itemBinding.inclBookAuthor.tvLastName.text = item.author.lastName
-            itemBinding.inclBookAuthor.tvBirthDate.text = item.author.birthDate
+            itemBinding.inclBookAuthor.tvFirstName.text = item.author?.firstName ?: "empty"
+            itemBinding.inclBookAuthor.tvLastName.text = item.author?.lastName ?: "empty"
+            itemBinding.inclBookAuthor.tvBirthDate.text = item.author?.birthDate ?: "empty"
             itemBinding.tvPageNumbers.text = item.pageNumbers.toString()
         }
     }
@@ -66,6 +66,7 @@ class MyAdapter(val mainActivity: MainActivity) : RecyclerView.Adapter<MyAdapter
             itemBinding.tvFirstName.text = item.firstName
             itemBinding.tvLastName.text = item.lastName
             itemBinding.tvBirthDate.text = item.birthDate
+            itemBinding.btnAuthorDel.setOnClickListener { mainActivity.vm.delAuthor(item) }
         }
     }
 

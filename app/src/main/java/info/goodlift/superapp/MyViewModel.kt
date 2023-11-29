@@ -14,9 +14,7 @@ import kotlinx.coroutines.launch
 
 class MyViewModel(application: Application) : AndroidViewModel(application) {
 
-    val repo = (application as SuperApp).superRepository
-    private var _str = MutableLiveData("12345")
-    val str: LiveData<String> = _str
+    private val repo = (application as SuperApp).superRepository
 
     //var myList: List<ItemTypeInterface> = emptyList()
 
@@ -37,8 +35,34 @@ class MyViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         viewModelScope.launch {
+            repo.clearBooks()
+            repo.clearAuthors()
+
             repo.insertAuthors(authorsList)
             _myList.value = repo.getAllAuthors()
+
+            var author = repo.getAuthor("First name 1")
+            var book = Book("book 1", 300)
+            book.idAuthor = author.idAuthor
+            repo.insertBook(book)
+
+            book = Book("book 2", 150)
+            book.idAuthor = author.idAuthor
+            repo.insertBook(book)
+
+            author = repo.getAuthor("First name 2")
+            book = Book("book 3", 200)
+            book.idAuthor = author.idAuthor
+            repo.insertBook(book)
+
+            book = Book("book 4", 140)
+            book.idAuthor = author.idAuthor
+            repo.insertBook(book)
+
+            val books = repo.getAllFullBooks()
+
+            val newList = (_myList.value as List<ItemTypeInterface>).plus(books)
+            _myList.value = newList
         }
 //        myList = listOf(
 //            Book("book 1", authorsList[1], 300),
@@ -57,7 +81,22 @@ class MyViewModel(application: Application) : AndroidViewModel(application) {
 //        )
     }
 
-    fun textChanger(s: String) {
-        _str.value = s
+    private fun getLists(){
+        viewModelScope.launch {
+//            _myList.value = repo.getAllAuthors()
+
+
+//            val books = repo.getAllFullBooks()
+
+//            val newList = (_myList.value as List<ItemTypeInterface>).plus(books)
+            _myList.value = (repo.getAllAuthors() as List<ItemTypeInterface>).plus(repo.getAllFullBooks())
+        }
+    }
+
+    fun delAuthor(author: Author){
+        viewModelScope.launch {
+            repo.delAuthor(author)
+            getLists()
+        }
     }
 }

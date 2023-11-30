@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
+import androidx.room.Update
 import info.goodlift.superapp.model.Author
 import info.goodlift.superapp.model.Book
 import info.goodlift.superapp.model.BookWithAuthor
@@ -17,6 +18,9 @@ interface MyDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertBooks(books: List<Book>)
+
+    @Update
+    suspend fun updateBook(book: Book)
 
     @Delete
     suspend fun deleteBook(book: Book)

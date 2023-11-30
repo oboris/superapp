@@ -9,6 +9,9 @@ data class BookWithAuthor (
     var pageNumbers: Int,
     var comment: String? = null,
 
+    @ColumnInfo(name = "id_book")
+    var idBook: Long,
+
     @Embedded
     val author: Author
 )

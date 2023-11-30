@@ -21,7 +21,7 @@ data class Book(
     var name: String,
 
     @ColumnInfo(name = "page_number")
-    val pageNumbers: Int,
+    var pageNumbers: Int,
     val comment: String? = null
 ) : ItemTypeInterface {
     @PrimaryKey(autoGenerate = true)

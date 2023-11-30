@@ -18,6 +18,10 @@ class SuperRepo(private val myDao: MyDao) {
         myDao.insertAuthors(authors)
     }
 
+    suspend fun updateBook(book: Book){
+        myDao.updateBook(book)
+    }
+
     suspend fun getAllAuthors(): List<Author>{
         return myDao.getAllAuthors()
     }
@@ -37,6 +41,8 @@ class SuperRepo(private val myDao: MyDao) {
         bookWithAuthor.forEach {
             val book = Book(it.name, it.pageNumbers)
             book.author = it.author
+            book.idBook = it.idBook
+            book.idAuthor = it.author.idAuthor
             books.add(book)
         }
         return books

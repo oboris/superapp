@@ -4,7 +4,6 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import info.goodlift.superapp.model.Author
 import info.goodlift.superapp.model.AuthorsHorizontalList
@@ -18,9 +17,10 @@ class MyViewModel(application: Application) : AndroidViewModel(application) {
 
     //var myList: List<ItemTypeInterface> = emptyList()
 
-    private var _myList: MutableLiveData<List<ItemTypeInterface>> = MutableLiveData<List<ItemTypeInterface>>().apply {
-        value = emptyList()
-    }
+    private var _myList: MutableLiveData<List<ItemTypeInterface>> =
+        MutableLiveData<List<ItemTypeInterface>>().apply {
+            value = emptyList()
+        }
     val myList: LiveData<List<ItemTypeInterface>> = _myList
 
     val authorsList =
@@ -81,7 +81,7 @@ class MyViewModel(application: Application) : AndroidViewModel(application) {
 //        )
     }
 
-    private fun getLists(){
+    private fun getLists() {
         viewModelScope.launch {
 //            _myList.value = repo.getAllAuthors()
 
@@ -89,13 +89,32 @@ class MyViewModel(application: Application) : AndroidViewModel(application) {
 //            val books = repo.getAllFullBooks()
 
 //            val newList = (_myList.value as List<ItemTypeInterface>).plus(books)
-            _myList.value = (repo.getAllAuthors() as List<ItemTypeInterface>).plus(repo.getAllFullBooks())
+            _myList.value =
+                (repo.getAllAuthors() as List<ItemTypeInterface>).plus(repo.getAllFullBooks())
+                    .plus(AuthorsHorizontalList(authorsList))
+//            _myList.value = (repo.getAllAuthors() as List<ItemTypeInterface>).plus(AuthorsHorizontalList(authorsList))
         }
     }
 
-    fun delAuthor(author: Author){
+    fun delAuthor(author: Author) {
         viewModelScope.launch {
             repo.delAuthor(author)
+            getLists()
+        }
+    }
+
+    fun plusPage(book: Book) {
+        book.pageNumbers++
+        viewModelScope.launch {
+            repo.updateBook(book)
+            getLists()
+        }
+    }
+
+    fun minusPage(book: Book) {
+        book.pageNumbers--
+        viewModelScope.launch {
+            repo.updateBook(book)
             getLists()
         }
     }

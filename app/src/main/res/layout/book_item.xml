@@ -31,4 +31,20 @@
         android:layout_height="wrap_content"
         android:text="300"
         tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btnPagePlus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="PP"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/btnPageMinus"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="PM"
+        tools:ignore="HardcodedText" />
 </LinearLayout>

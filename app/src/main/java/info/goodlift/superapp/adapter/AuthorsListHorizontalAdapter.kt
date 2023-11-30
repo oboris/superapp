@@ -26,7 +26,7 @@ class AuthorsListHorizontalAdapter(private val list: List<Author>) :
         holder.bind(list[position])
     }
 
-    inner class HorizontalAuthorsListHolder (private val itemBinding: AuthorHorizontalItemBinding) : RecyclerView.ViewHolder(itemBinding.root){
+    class HorizontalAuthorsListHolder (private val itemBinding: AuthorHorizontalItemBinding) : RecyclerView.ViewHolder(itemBinding.root){
         fun bind(item: Author) {
             itemBinding.tvFirstName.text = item.firstName
             itemBinding.tvLastName.text = item.lastName

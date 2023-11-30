@@ -2,14 +2,12 @@ package info.goodlift.superapp.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
-//import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import info.goodlift.superapp.MainActivity
 import info.goodlift.superapp.databinding.AuthorItemBinding
 import info.goodlift.superapp.databinding.AuthorsListItemBinding
 import info.goodlift.superapp.databinding.BookItemBinding
@@ -25,8 +23,6 @@ class MyAdapter(
     interface OnClickListener {
         fun onClick(item: ItemTypeInterface, num: Int = 0)
     }
-
-//    var onClickListener: OnClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyHolder {
         return when (viewType) {

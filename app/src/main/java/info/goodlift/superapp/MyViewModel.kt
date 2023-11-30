@@ -23,7 +23,7 @@ class MyViewModel(application: Application) : AndroidViewModel(application) {
         }
     val myList: LiveData<List<ItemTypeInterface>> = _myList
 
-    val authorsList =
+    private val authorsList =
         listOf(
             Author("First name 1", "Second name 1", "jjjj"),
             Author("First name 2", "Second name 2", "jdfgidfgfd"),
@@ -59,10 +59,11 @@ class MyViewModel(application: Application) : AndroidViewModel(application) {
             book.idAuthor = author.idAuthor
             repo.insertBook(book)
 
-            val books = repo.getAllFullBooks()
-
-            val newList = (_myList.value as List<ItemTypeInterface>).plus(books)
-            _myList.value = newList
+            getLists()
+//            val books = repo.getAllFullBooks()
+//
+//            val newList = (_myList.value as List<ItemTypeInterface>).plus(books)
+//            _myList.value = newList
         }
 //        myList = listOf(
 //            Book("book 1", authorsList[1], 300),
@@ -83,16 +84,8 @@ class MyViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun getLists() {
         viewModelScope.launch {
-//            _myList.value = repo.getAllAuthors()
-
-
-//            val books = repo.getAllFullBooks()
-
-//            val newList = (_myList.value as List<ItemTypeInterface>).plus(books)
             _myList.value =
-                (repo.getAllAuthors() as List<ItemTypeInterface>).plus(repo.getAllFullBooks())
-                    .plus(AuthorsHorizontalList(authorsList))
-//            _myList.value = (repo.getAllAuthors() as List<ItemTypeInterface>).plus(AuthorsHorizontalList(authorsList))
+                repo.getAllAuthors().plus(repo.getAllFullBooks()).plus(AuthorsHorizontalList(authorsList))
         }
     }
 

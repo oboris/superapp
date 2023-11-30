@@ -22,8 +22,10 @@ data class Book(
 
     @ColumnInfo(name = "page_number")
     var pageNumbers: Int,
+
     val comment: String? = null
 ) : ItemTypeInterface {
+
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_book")
     var idBook: Long = 0
@@ -33,6 +35,7 @@ data class Book(
 
     @ColumnInfo(name = "id_author")
     var idAuthor: Long = author?.idAuthor ?: 0
+
     override fun getItemType(): Int {
         return ItemTypeInterface.bookType
     }

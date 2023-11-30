@@ -8,14 +8,18 @@ import androidx.room.PrimaryKey
 data class Author(
     @ColumnInfo(name = "first_name")
     val firstName: String,
+
     @ColumnInfo(name = "last_name")
     val lastName: String,
+
     @ColumnInfo(name = "birth_date")
     val birthDate: String,
 ) : ItemTypeInterface {
+
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_author")
     var idAuthor: Long = 0
+
     override fun getItemType(): Int {
         return ItemTypeInterface.authorType
     }

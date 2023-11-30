@@ -5,7 +5,6 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import androidx.room.Transaction
 import androidx.room.Update
 import info.goodlift.superapp.model.Author
 import info.goodlift.superapp.model.Book
@@ -28,8 +27,8 @@ interface MyDao {
     @Query("Delete From books")
     suspend fun deleteAllBooks()
 
-    @Query("Select * From books")
-    suspend fun getAllBooks(): List<Book>
+//    @Query("Select * From books")
+//    suspend fun getAllBooks(): List<Book>
 
     @Query("Select * From books Join authors On books.id_author = authors.id_author")
     suspend fun getAllFullBooks(): List<BookWithAuthor>

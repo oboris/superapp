@@ -1,10 +1,42 @@
 package info.goodlift.superapp.repo
 
+import info.goodlift.superapp.api.MyApi
+import info.goodlift.superapp.api.MyRetrofitClient
 import info.goodlift.superapp.dao.MyDao
 import info.goodlift.superapp.model.Author
 import info.goodlift.superapp.model.Book
 
 class SuperRepo(private val myDao: MyDao) {
+
+    private val myRetrofitClient = MyRetrofitClient.getClient()
+    private val myApi = myRetrofitClient.create(MyApi::class.java)
+
+    suspend fun loadAuthors(): List<Author>? {
+        val response = myApi.getAuthors()
+        return if (response.isSuccessful) {
+            response.body()
+        } else {
+            null
+        }
+    }
+
+    suspend fun loadBooks(): List<Book>? {
+        val response = myApi.getBooks()
+        return if (response.isSuccessful) {
+            response.body()
+        } else {
+            null
+        }
+    }
+
+    suspend fun loadBooksWithAuthors(): List<Book>? {
+        val response = myApi.getBooks()
+        return if (response.isSuccessful) {
+            response.body()
+        } else {
+            null
+        }
+    }
 
     suspend fun clearBooks(){
         myDao.deleteAllBooks()

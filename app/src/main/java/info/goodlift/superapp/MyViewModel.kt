@@ -38,28 +38,33 @@ class MyViewModel(application: Application) : AndroidViewModel(application) {
             repo.clearBooks()
             repo.clearAuthors()
 
-            repo.insertAuthors(authorsList)
-            _myList.value = repo.getAllAuthors()
+            val authors = repo.loadAuthors(16)
+            authors?.let { repo.insertAuthors(it) }
 
-            var author = repo.getAuthor("First name 1")
-            var book = Book("book 1", 300)
-            book.idAuthor = author.idAuthor
-            repo.insertBook(book)
 
-            book = Book("book 2", 150)
-            book.idAuthor = author.idAuthor
-            repo.insertBook(book)
+            val books = repo.loadBooks(4, 10)
 
-            author = repo.getAuthor("First name 2")
-            book = Book("book 3", 200)
-            book.idAuthor = author.idAuthor
-            repo.insertBook(book)
+            _myList.value = repo.getAllAuthors().plus(books as List<ItemTypeInterface>)
+//            var author = repo.getAuthor("First name 1")
+//            var book = Book("book 1", 300)
+//            book.idAuthor = author.idAuthor
+//            repo.insertBook(book)
+//
+//            book = Book("book 2", 150)
+//            book.idAuthor = author.idAuthor
+//            repo.insertBook(book)
+//
+//            author = repo.getAuthor("First name 2")
+//            book = Book("book 3", 200)
+//            book.idAuthor = author.idAuthor
+//            repo.insertBook(book)
+//
+//            book = Book("book 4", 140)
+//            book.idAuthor = author.idAuthor
+//            repo.insertBook(book)
+//
+//            getLists()
 
-            book = Book("book 4", 140)
-            book.idAuthor = author.idAuthor
-            repo.insertBook(book)
-
-            getLists()
 //            val books = repo.getAllFullBooks()
 //
 //            val newList = (_myList.value as List<ItemTypeInterface>).plus(books)

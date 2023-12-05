@@ -5,6 +5,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import com.squareup.moshi.Json
 
 @Entity(
     tableName = "books",
@@ -18,8 +19,10 @@ import androidx.room.PrimaryKey
     ]
 )
 data class Book(
+    @field:Json(name = "title")
     var name: String,
 
+    @field:Json(name = "page_number")
     @ColumnInfo(name = "page_number")
     var pageNumbers: Int,
 

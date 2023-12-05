@@ -4,7 +4,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 object MyRetrofitClient {
-    private const val BASE_URL = "http://boris.cdu.edu.ua/"
+    private const val BASE_URL = "http://boris.cdu.edu.ua/api/"
 
     fun getClient(): Retrofit =
         Retrofit.Builder()

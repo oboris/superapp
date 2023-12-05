@@ -11,8 +11,8 @@ class SuperRepo(private val myDao: MyDao) {
     private val myRetrofitClient = MyRetrofitClient.getClient()
     private val myApi = myRetrofitClient.create(MyApi::class.java)
 
-    suspend fun loadAuthors(): List<Author>? {
-        val response = myApi.getAuthors()
+    suspend fun loadAuthors(num: Int): List<Author>? {
+        val response = myApi.getAuthors(num)
         return if (response.isSuccessful) {
             response.body()
         } else {
@@ -20,8 +20,8 @@ class SuperRepo(private val myDao: MyDao) {
         }
     }
 
-    suspend fun loadBooks(): List<Book>? {
-        val response = myApi.getBooks()
+    suspend fun loadBooks(numAuthors: Int, numBooks: Int): List<Book>? {
+        val response = myApi.getBooksWithAuthors(numAuthors, numBooks)
         return if (response.isSuccessful) {
             response.body()
         } else {
@@ -29,14 +29,14 @@ class SuperRepo(private val myDao: MyDao) {
         }
     }
 
-    suspend fun loadBooksWithAuthors(): List<Book>? {
-        val response = myApi.getBooks()
-        return if (response.isSuccessful) {
-            response.body()
-        } else {
-            null
-        }
-    }
+//    suspend fun loadBooks(num: Int): List<Book>? {
+//        val response = myApi.getBooks(num)
+//        return if (response.isSuccessful) {
+//            response.body()
+//        } else {
+//            null
+//        }
+//    }
 
     suspend fun clearBooks(){
         myDao.deleteAllBooks()
